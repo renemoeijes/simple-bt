@@ -51,7 +51,6 @@ while {1} {
       -re {.*NEW.*Transport /org/bluez/hci0/dev_([0-9A-F_]{17})/fd[0-9]+} {
          set curmac [string map {_ :} $expect_out(1,string)]
          puts "\[DEBUG\] NEW Transport macaddress: $curmac"
-
          # Disconnect all other connected devices
          send "devices Connected\r"
          expect {
@@ -66,6 +65,15 @@ while {1} {
                exp_continue
             }
             timeout {}
+         }
+         # If spotify exist, stop it.
+         set status [catch {exec systemctl is-active spotifyd} result]
+         if {$status == 0 && $result == "active"} {
+            # spotifyd draait, DBus pause uitvoeren
+            exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotifyd \
+                  /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
+         } else {
+            puts "\[INFO\] spotifyd draait niet, niets te pauzeren"
          }
          exp_continue
       }

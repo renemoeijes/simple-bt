@@ -1,0 +1,16 @@
+simple-bt (1.1.0) stable; urgency=low
+
+  * Spotify control added
+
+ -- renemoeijes <you@example.com>  Tue, 16 Sep 2025 13:00:00 +0200
+
+  * Eerste release van simple-bt-agent
+
+ -- R. Moeijes simpelmuis@gmail.com  Tue, 16 Sep 2025 12:00:00 +0200
+
+
+simple-bt (1.0.0) stable; urgency=low
+
+  * Eerste release van simple-bt-agent
+
+ -- renemoeijes <you@example.com>  Tue, 16 Sep 2025 12:00:00 +0200
