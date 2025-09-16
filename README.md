@@ -24,4 +24,4 @@ Just connect and play. no codes, no old connections, stutter etc. Just connect a
 - The script `simple-bt-agent.sh` contains the logic for the Bluetooth agent.
 
 ## Author
-- [renemoeijes](https://github.com/renemoeijes)
+- [R. Moeijes] (https://github.com/renemoeijes)
