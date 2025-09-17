@@ -10,8 +10,13 @@ find pkg -type f | while read f; do
       dos2unix "$f"
    fi
 done
-
 # ARCH=$(dpkg --print-architecture)
 ARCH="all"  # scripts only, works on all 
 VERSION=$(grep '^Version:' pkg/DEBIAN/control | awk '{print $2}')
+
+
+# Make backup met datum-tijd in bestandsnaam
+DATETIME=$(date +%Y%m%d-%H%M%S)
+tar cf ../simple-bt-${VERSION}_${ARCH}.${DATETIME}.tar  .
+
 dpkg-deb --build pkg simple-bt_${VERSION}_${ARCH}.deb

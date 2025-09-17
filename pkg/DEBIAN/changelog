@@ -1,3 +1,10 @@
+simple-bt (1.1.1) stable; urgency=low
+
+  * Use ALSA
+  * Add restart bluealsa-aplay after connecting new device.
+  
+ -- R. Moeijes simpelmuis@gmail.com  Tue, 17 Sep 2025 09:00:00 +0200
+
 simple-bt (1.1.0) stable; urgency=low
 
   * Spotify control added

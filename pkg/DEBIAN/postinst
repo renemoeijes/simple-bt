@@ -3,9 +3,12 @@ set -e
 
 case "$1" in
    configure)
+      # setup device as 'speaker'
+      sed -i 's/^Class =.*/Class = 0x240414/' /etc/bluetooth/main.conf
       systemctl daemon-reload
       systemctl enable simple-bt.service
       systemctl start simple-bt.service
+      systemctl enable --now bluealsa
    ;;
 esac
 

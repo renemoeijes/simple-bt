@@ -1,8 +1,8 @@
 Package: simple-bt
-Version: 1.1.0
+Version: 1.1.1
 Maintainer: R. Moeijes simpelmuis@gmail.com
 Architecture: all
-Depends: expect, bluez
+Depends: expect, bluez, bluez-tools, bluez-alsa-utils
 Description: Simple Bluetooth agent and device manager
  A small Expect-based helper that listens to bluetoothctl events and
  disconnects other devices when a new device connects. 

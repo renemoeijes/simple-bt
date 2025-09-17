@@ -49,6 +49,7 @@ while {1} {
       }
       # Detecteer nieuw transport (voor audio apparaten zoals telefoons)
       -re {.*NEW.*Transport /org/bluez/hci0/dev_([0-9A-F_]{17})/fd[0-9]+} {
+         exec systemctl restart bluealsa-aplay
          set curmac [string map {_ :} $expect_out(1,string)]
          puts "\[DEBUG\] NEW Transport macaddress: $curmac"
          # Disconnect all other connected devices
