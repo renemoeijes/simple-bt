@@ -2,7 +2,8 @@
 set -e
 
 # Zet je token hier of exporteer als GH_TOKEN
-GH_TOKEN="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"
+# GH_TOKEN="${GH_TOKEN:?Set GH_TOKEN as environment variable}"
+GH_TOKEN=$(cat .gitignore/GH_TOKEN)
 REPO="renemoeijes/simple-bt"
 DEB_FILE="simple-bt_1.1.0_all.deb"  # pas aan indien nodig
 
