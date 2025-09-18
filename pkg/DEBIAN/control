@@ -1,5 +1,5 @@
 Package: simple-bt
-Version: 1.1.1
+Version: 1.1.2
 Maintainer: R. Moeijes simpelmuis@gmail.com
 Architecture: all
 Depends: expect, bluez, bluez-tools, bluez-alsa-utils

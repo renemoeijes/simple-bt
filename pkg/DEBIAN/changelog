@@ -1,3 +1,9 @@
+simple-bt (1.1.2) stable; urgency=low
+
+  * simple-bt-agent changed the spotify check from spotifyd to raspotify.
+  
+ -- R. Moeijes simpelmuis@gmail.com  Tue, 17 Sep 2025 09:00:00 +0200
+
 simple-bt (1.1.1) stable; urgency=low
 
   * Use ALSA

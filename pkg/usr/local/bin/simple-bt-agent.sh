@@ -67,15 +67,19 @@ while {1} {
             }
             timeout {}
          }
-         # If spotify exist, stop it.
-         set status [catch {exec systemctl is-active spotifyd} result]
+         # If raspotify exist, stop it.
+         set status [catch {exec systemctl is-active raspotify} result]
          if {$status == 0 && $result == "active"} {
-            # spotifyd draait, DBus pause uitvoeren
-            exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotifyd \
-                  /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
-         } else {
-            puts "\[INFO\] spotifyd draait niet, niets te pauzeren"
+            exec systemctl restart raspotify
+            exp_continue
+         } 
+         # check if spotifyd is running, and restart it if so.
+         set status [catch {exec systemctl is-active spotifyd} result]            
+         if {$status == 0 && $result == "active"} {
+            exec systemctl restart spotifyd
+            exp_continue
          }
+         puts "\[INFO\] spotifyd draait niet, niets te pauzeren"
          exp_continue
       }
    eof { break }
