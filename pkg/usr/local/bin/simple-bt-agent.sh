@@ -4,6 +4,7 @@
 set env(TERM) dumb
 spawn bluetoothctl
 
+send "power on\r"
 send "agent on\r"
 send "default-agent\r"
 send "pairable on\r"
