@@ -1,31 +1,24 @@
 #!/bin/sh
 set -e
 
+CONF="/etc/bluetooth/main.conf"
+
+replace_or_add() {
+   KEY=$1
+   VALUE=$2
+   if grep -q "^\s*#\?\s*${KEY}" "$CONF"; then
+      sed -i "s|^\s*#\?\s*${KEY}.*|${KEY} = ${VALUE}|" "$CONF"
+   else
+      echo "${KEY} = ${VALUE}" | sudo tee -a "$CONF" >/dev/null
+   fi
+}
+
 case "$1" in
    configure)
-      # setup device as 'speaker'
-      #sed -i 's/^Class =.*/Class = 0x240414/' /etc/bluetooth/main.conf
+      replace_or_add "Class" "0x240414"
+      replace_or_add "DiscoverableTimeout" "0"
+      replace_or_add "PairableTimeout" "0"
 
-# Class = 0x240414
-      if grep -q '^Class =' /etc/bluetooth/main.conf; then
-         sed -i 's/^Class =.*/Class = 0x240414/' /etc/bluetooth/main.conf
-      else
-         echo 'Class = 0x240414' | sudo tee -a /etc/bluetooth/main.conf >/dev/null
-      fi
-
-# DiscoverableTimeout = 0
-      if grep -q '^DiscoverableTimeout =' /etc/bluetooth/main.conf; then
-         sed -i 's/^DiscoverableTimeout =.*/DiscoverableTimeout = 0/' /etc/bluetooth/main.conf
-      else
-         echo 'DiscoverableTimeout = 0' | sudo tee -a /etc/bluetooth/main.conf >/dev/null
-      fi
-
-# PairableTimeout = 0
-      if grep -q '^PairableTimeout =' /etc/bluetooth/main.conf; then
-         sed -i 's/^PairableTimeout =.*/PairableTimeout = 0/' /etc/bluetooth/main.conf
-      else
-         echo 'PairableTimeout = 0' | sudo tee -a /etc/bluetooth/main.conf >/dev/null
-      fi
       systemctl daemon-reload
       systemctl enable simple-bt.service
       systemctl start simple-bt.service
@@ -34,3 +27,4 @@ case "$1" in
 esac
 
 exit 0
+
