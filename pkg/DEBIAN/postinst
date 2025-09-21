@@ -4,7 +4,28 @@ set -e
 case "$1" in
    configure)
       # setup device as 'speaker'
-      sed -i 's/^Class =.*/Class = 0x240414/' /etc/bluetooth/main.conf
+      #sed -i 's/^Class =.*/Class = 0x240414/' /etc/bluetooth/main.conf
+
+# Class = 0x240414
+      if grep -q '^Class =' /etc/bluetooth/main.conf; then
+         sed -i 's/^Class =.*/Class = 0x240414/' /etc/bluetooth/main.conf
+      else
+         echo 'Class = 0x240414' | sudo tee -a /etc/bluetooth/main.conf >/dev/null
+      fi
+
+# DiscoverableTimeout = 0
+      if grep -q '^DiscoverableTimeout =' /etc/bluetooth/main.conf; then
+         sed -i 's/^DiscoverableTimeout =.*/DiscoverableTimeout = 0/' /etc/bluetooth/main.conf
+      else
+         echo 'DiscoverableTimeout = 0' | sudo tee -a /etc/bluetooth/main.conf >/dev/null
+      fi
+
+# PairableTimeout = 0
+      if grep -q '^PairableTimeout =' /etc/bluetooth/main.conf; then
+         sed -i 's/^PairableTimeout =.*/PairableTimeout = 0/' /etc/bluetooth/main.conf
+      else
+         echo 'PairableTimeout = 0' | sudo tee -a /etc/bluetooth/main.conf >/dev/null
+      fi
       systemctl daemon-reload
       systemctl enable simple-bt.service
       systemctl start simple-bt.service
