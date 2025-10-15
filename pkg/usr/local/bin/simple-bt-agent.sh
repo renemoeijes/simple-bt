@@ -48,7 +48,7 @@ while {1} {
          send "yes\r"
          exp_continue
       }
-      # Detecteer nieuw transport (voor audio apparaten zoals telefoons)
+      # Detecteer nieuw BT transport (voor audio apparaten zoals telefoons)
       -re {.*NEW.*Transport /org/bluez/hci0/dev_([0-9A-F_]{17})/fd[0-9]+} {
          exec systemctl restart bluealsa-aplay
          set curmac [string map {_ :} $expect_out(1,string)]
@@ -81,6 +81,9 @@ while {1} {
             exp_continue
          }
          puts "\[INFO\] spotifyd draait niet, niets te pauzeren"
+         # stop RasRadio
+         exec pkill -f RasRadio
+         puts "\[INFO\] RasRadio gestopt (als het draaide)"
          exp_continue
       }
    eof { break }

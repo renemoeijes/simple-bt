@@ -3,6 +3,18 @@
 A simple Bluetooth agent for Raspberry Pi, designed for installation via a DEB package.
 Just connect and play. no codes, no old connections, stutter etc. Just connect and play.
 
+This is part of a whole concept: 
+- Simple-wifi  -> wifi ssid setup via phone.
+- Simple-bt    -> Play bluetooth
+- Simple-spot  -> Play spotify
+
+Link to website:
+https://renemoeijes.github.io/simple-wifi/
+
+Install All Script:
+https://raw.githubusercontent.com/renemoeijes/simple-wifi/main/Simple-Install.sh
+
+
 
 ## Structure
 - `DEBIAN/` — Contains package metadata and scripts (`control`, `postinst`, `prerm`).
